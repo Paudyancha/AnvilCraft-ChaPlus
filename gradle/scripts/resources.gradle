@@ -15,6 +15,9 @@ tasks.withType(ProcessResources).configureEach {
         mod_version            : version,
         mod_description        : mod_description,
         mod_author             : mod_author,
+        mod_url                : mod_url,
+        modrinth_id            : modrinth_id,
+        curseforge_id          : curseforge_id,
     ]
     inputs.properties replaceProperties
 
