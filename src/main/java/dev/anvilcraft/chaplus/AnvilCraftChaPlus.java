@@ -1,5 +1,6 @@
 package dev.anvilcraft.chaplus;
 
+import dev.anvilcraft.chaplus.init.AddonItems;
 import dev.anvilcraft.lib.v2.registrum.Registrum;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -12,5 +13,6 @@ public class AnvilCraftChaPlus {
     public static final Registrum REGISTRUM = Registrum.create(AnvilCraftChaPlus.MOD_ID);
 
     public AnvilCraftChaPlus(IEventBus modEventBus, ModContainer container) {
+        AddonItems.register();
     }
 }

@@ -8,7 +8,7 @@ version="${mod_version}"
 displayName="${mod_name}"
 #displayURL = "https://www.anvilcraft.dev/"
 issueTrackerURL = "${mod_url}/issues"
-#logoFile = "pack.png"
+logoFile = "pack.png"
 authors = "${mod_author}"
 description = '''
 ${mod_description}
