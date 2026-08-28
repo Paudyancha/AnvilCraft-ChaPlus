@@ -1,7 +1,9 @@
 package dev.anvilcraft.chaplus;
 
+import dev.anvilcraft.chaplus.init.AddonItemGroups;
 import dev.anvilcraft.chaplus.init.AddonItems;
 import dev.anvilcraft.lib.v2.registrum.Registrum;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -14,5 +16,10 @@ public class AnvilCraftChaPlus {
 
     public AnvilCraftChaPlus(IEventBus modEventBus, ModContainer container) {
         AddonItems.register();
+        AddonItemGroups.register(modEventBus);
+    }
+
+    public static ResourceLocation of(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 }
