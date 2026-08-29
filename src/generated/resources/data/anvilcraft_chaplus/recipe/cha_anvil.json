@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:brown_wool"
+    },
+    "B": {
+      "item": "minecraft:spruce_planks"
+    },
+    "M": {
+      "item": "minecraft:melon"
+    }
+  },
+  "pattern": [
+    "AAA",
+    " M ",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "anvilcraft_chaplus:cha_anvil"
+  }
+}
