@@ -1,5 +1,10 @@
 {
+  "anvilcraft_chaplus.configuration.max_effective_height": "猹砧最大生效高度",
+  "anvilcraft_chaplus.configuration.max_effective_height.tooltip": "猹砧最大生效高度",
+  "anvilcraft_chaplus.configuration.section.anvilcraft.chaplus.server.toml": "铁砧工艺：猹+|服务端配置",
+  "anvilcraft_chaplus.configuration.section.anvilcraft.chaplus.server.toml.title": "铁砧工艺：猹+|服务端配置",
+  "anvilcraft_chaplus.configuration.title": "铁砧工艺: 猹+配置",
   "block.anvilcraft_chaplus.cha_anvil": "猹砧",
   "item.anvilcraft_chaplus.tuning_fork": "钢叉",
-  "itemGroup.anvilcraft_chaplus.addon_items": "铁砧工艺: 猹加"
+  "itemGroup.anvilcraft_chaplus.addon_items": "铁砧工艺: 猹+"
 }

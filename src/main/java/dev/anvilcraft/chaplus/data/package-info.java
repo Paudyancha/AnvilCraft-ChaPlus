@@ -2,7 +2,7 @@
 @ParametersAreNonnullByDefault
 @FieldsAreNonnullByDefault
 
-package dev.anvilcraft.chaplus.item;
+package dev.anvilcraft.chaplus.data;
 
 import com.mojang.logging.annotations.FieldsAreNonnullByDefault;
 import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
