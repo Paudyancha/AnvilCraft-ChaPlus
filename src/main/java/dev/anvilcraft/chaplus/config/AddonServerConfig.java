@@ -9,4 +9,7 @@ import net.neoforged.fml.config.ModConfig;
 public class AddonServerConfig {
     @Comment("Effective maximum height of Cha Anvil")
     public int maxEffectiveHeight = -59;
+
+    @Comment("Tuning fork throw threshold time")
+    public int THROW_THRESHOLD_TIME = 10;
 }
