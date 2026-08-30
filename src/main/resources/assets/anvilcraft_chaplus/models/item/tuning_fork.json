@@ -1,0 +1,15 @@
+{
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "anvilcraft_chaplus:item/tuning_fork_3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "anvilcraft_chaplus:item/tuning_fork"
+      }
+    }
+  }
+}

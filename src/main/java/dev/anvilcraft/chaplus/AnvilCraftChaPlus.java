@@ -3,6 +3,7 @@ package dev.anvilcraft.chaplus;
 import dev.anvilcraft.chaplus.config.AddonServerConfig;
 import dev.anvilcraft.chaplus.data.AddonDatagen;
 import dev.anvilcraft.chaplus.init.AddonBlocks;
+import dev.anvilcraft.chaplus.init.AddonEntities;
 import dev.anvilcraft.chaplus.init.AddonItemGroups;
 import dev.anvilcraft.chaplus.init.AddonItems;
 import dev.anvilcraft.lib.v2.config.ConfigManager;
@@ -26,6 +27,7 @@ public class AnvilCraftChaPlus {
         AddonItems.register();
         AddonBlocks.register();
         AddonItemGroups.register(modEventBus);
+        AddonEntities.register();
         AddonDatagen.init();
     }
 

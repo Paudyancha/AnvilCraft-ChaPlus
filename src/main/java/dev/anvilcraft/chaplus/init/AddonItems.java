@@ -2,6 +2,7 @@ package dev.anvilcraft.chaplus.init;
 
 import dev.anvilcraft.chaplus.item.TuningFork;
 import dev.anvilcraft.lib.v2.registrum.util.entry.ItemEntry;
+import dev.dubhe.anvilcraft.util.DataGenUtil;
 import net.minecraft.world.item.Item;
 
 import static dev.anvilcraft.chaplus.AnvilCraftChaPlus.REGISTRUM;
@@ -12,6 +13,7 @@ public class AddonItems {
     }
     public static final ItemEntry<TuningFork> TUNING_FORK = REGISTRUM
         .item("tuning_fork", TuningFork::new)
+        .model(DataGenUtil::noExtraModelOrState)
         .properties(prop -> prop.durability(1561).stacksTo(1))
         .register();
     public static void register() {}

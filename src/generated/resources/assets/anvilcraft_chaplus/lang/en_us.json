@@ -5,6 +5,7 @@
   "anvilcraft_chaplus.configuration.section.anvilcraft.chaplus.server.toml.title": "Anvilcraft Chaplus Server Configuration",
   "anvilcraft_chaplus.configuration.title": "Anvilcraft Chaplus Configuration",
   "block.anvilcraft_chaplus.cha_anvil": "Cha Anvil",
+  "entity.anvilcraft_chaplus.thrown_fork": "Thrown Fork",
   "item.anvilcraft_chaplus.tuning_fork": "Tuning Fork",
   "itemGroup.anvilcraft_chaplus.addon_items": "AnvilCraft: Cha Plus"
 }

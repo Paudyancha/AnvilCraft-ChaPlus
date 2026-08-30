@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "anvilcraft_chaplus:item/tuning_fork"
-  }
-}
