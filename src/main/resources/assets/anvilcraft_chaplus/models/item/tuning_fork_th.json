@@ -2,7 +2,7 @@
   "loader": "neoforge:separate_transforms",
   "gui_light": "front",
   "base": {
-    "parent": "anvilcraft_chaplus:item/tuning_fork_3d"
+    "parent": "anvilcraft_chaplus:item/tuning_fork_th_3d"
   },
   "perspectives": {
     "gui": {
@@ -17,13 +17,5 @@
         "layer0": "anvilcraft_chaplus:item/tuning_fork"
       }
     }
-  },
-  "overrides": [
-    {
-      "predicate": {
-        "throwing": 1
-      },
-      "model": "anvilcraft_chaplus:item/tuning_fork_th"
-    }
-  ]
+  }
 }

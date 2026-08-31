@@ -4,6 +4,8 @@ import dev.anvilcraft.chaplus.AnvilCraftChaPlus;
 import dev.anvilcraft.chaplus.config.AddonServerConfig;
 import dev.anvilcraft.chaplus.entity.ThrownForkEntity;
 import dev.anvilcraft.chaplus.init.AddonEntities;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,12 +15,26 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+
+import java.util.function.Consumer;
 
 public class TuningFork extends Item  {
     public static final int THROW_THRESHOLD_TIME = AnvilCraftChaPlus.CONFIG.THROW_THRESHOLD_TIME;
 
     public TuningFork(Properties properties) {
         super(properties);
+    }
+
+    //添加一个thrown属性
+    @Override
+    @SuppressWarnings({"deprecation", "removal"})
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        ItemProperties.register(
+            this,
+            ResourceLocation.withDefaultNamespace("throwing"),
+            (stack, level, entity, seed) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F
+        );
     }
 
     @Override
