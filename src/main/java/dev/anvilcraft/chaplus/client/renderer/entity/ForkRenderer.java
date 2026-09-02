@@ -2,15 +2,12 @@ package dev.anvilcraft.chaplus.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import dev.anvilcraft.chaplus.entity.ThrownForkEntity;
-import dev.dubhe.anvilcraft.client.renderer.entity.ThrownHeavyHalberdRenderer;
 import dev.dubhe.anvilcraft.entity.ThrownHeavyHalberdEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;

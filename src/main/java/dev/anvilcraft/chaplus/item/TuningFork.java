@@ -1,7 +1,6 @@
 package dev.anvilcraft.chaplus.item;
 
 import dev.anvilcraft.chaplus.AnvilCraftChaPlus;
-import dev.anvilcraft.chaplus.config.AddonServerConfig;
 import dev.anvilcraft.chaplus.entity.ThrownForkEntity;
 import dev.anvilcraft.chaplus.init.AddonEntities;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -20,15 +19,17 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import java.util.function.Consumer;
 
 public class TuningFork extends Item  {
-    public static final int THROW_THRESHOLD_TIME = AnvilCraftChaPlus.CONFIG.THROW_THRESHOLD_TIME;
+
 
     public TuningFork(Properties properties) {
         super(properties);
     }
 
+
+
     //添加一个thrown属性
     @Override
-    @SuppressWarnings({"deprecation", "removal"})
+    @SuppressWarnings({"removal"})
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         ItemProperties.register(
             this,
@@ -55,8 +56,8 @@ public class TuningFork extends Item  {
             // 计算实际使用时间
             int i = this.getUseDuration(stack, entity) - timeCharged;
             // 如果蓄力时间大于阈值，则投掷
-            AnvilCraftChaPlus.LOGGER.info(String.valueOf(i));
-            if (i >= THROW_THRESHOLD_TIME) {
+
+            if (i >= AnvilCraftChaPlus.CONFIG.THROW_THRESHOLD_TIME) {
                 if (!level.isClientSide) {
                     // 投掷逻辑
                     this.shootFork(level, player, stack);
@@ -72,15 +73,25 @@ public class TuningFork extends Item  {
 
     private void shootFork(Level level, Player player, ItemStack stack) {
         ThrownForkEntity fork = AddonEntities.THROWN_FORK.create(level);
+
         if (fork == null) return;
 
         // 生成位置：玩家眼睛前方 0.5 格
         Vec3 eyePos = player.getEyePosition();
         Vec3 lookVec = player.getLookAngle();
         Vec3 spawnPos = eyePos.add(lookVec.scale(0.5));
+        ItemStack sStack = player.getOffhandItem();;
+        stack.shrink(1);
+
 
         fork.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
+
+        if(!sStack.isEmpty())
+            fork.setItemPlayer(player,sStack.split(1));
+
+        //fork.setUseOnContext(new UseOnContext(level,player,player.getMainHandItem(),stack, ProjectileUtil.get));
         // 正确传入射手（player），并使用玩家的朝向
+
         fork.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F, 1.0F);
 
         level.addFreshEntity(fork);
