@@ -1,11 +1,11 @@
 package dev.anvilcraft.chaplus.entity;
 
-import dev.anvilcraft.chaplus.AnvilCraftChaPlus;
 import dev.anvilcraft.chaplus.init.AddonItems;
 import dev.dubhe.anvilcraft.block.item.ResinBlockItem;
 import dev.dubhe.anvilcraft.entity.ThrownHeavyHalberdEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -13,6 +13,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 
 import javax.annotation.Nullable;
+
+import static dev.anvilcraft.chaplus.AnvilCraftChaPlus.LOGGER;
 
 public class ThrownForkEntity extends ThrownHeavyHalberdEntity {
     private ItemStack itemStack = ItemStack.EMPTY;
@@ -23,8 +25,6 @@ public class ThrownForkEntity extends ThrownHeavyHalberdEntity {
     public void setItemPlayer(Player player, ItemStack itemStack) {
         this.player = player;
         this.itemStack = itemStack;
-        AnvilCraftChaPlus.LOGGER.info("itemSet");
-        AnvilCraftChaPlus.LOGGER.info(itemStack.toString());
     }
 
     public ThrownForkEntity(EntityType<? extends Entity> type, Level level) {
@@ -45,12 +45,21 @@ public class ThrownForkEntity extends ThrownHeavyHalberdEntity {
         }
         super.onHitEntity(result);
     }
-
+    /*
+    *
+     */
     private static void dropItem(ThrownForkEntity entity, ItemStack itemStack) {
-        entity.spawnAtLocation(itemStack);
+        Level level = entity.level();
+        if (level.isClientSide) return;
+        ItemEntity itemEntity = new ItemEntity(level, entity.getX(), entity.getY() + .3D, entity.getZ(), itemStack);
+        //entity.spawnAtLocation(itemStack,-0.6F);
+
+        level.addFreshEntity(itemEntity);
+        String s = itemStack.getHoverName().getString()+" spawn at: " +itemEntity.getAge();
+        LOGGER.info(s);
 
         itemStack.setCount(0);
-        AnvilCraftChaPlus.LOGGER.info("itemDrop");
+
     }
 
     @Override

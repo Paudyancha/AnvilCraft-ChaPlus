@@ -29,6 +29,7 @@ public class AnvilCraftChaPlus {
         AddonItemGroups.register(modEventBus);
         AddonEntities.register();
         AddonDatagen.init();
+        LOGGER.info("嘟嘟哒 (●'◡'●)");
     }
 
     public static ResourceLocation of(String path) {

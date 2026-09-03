@@ -9,6 +9,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
@@ -51,7 +52,6 @@ public class TuningFork extends Item  {
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeCharged) {
         if (!level.isClientSide) {
-            AnvilCraftChaPlus.LOGGER.info(String.valueOf(11371));
             if (entity instanceof Player player) {
                 // timeCharged 是总蓄力时间 - 实际使用时间
                 // 计算实际使用时间
@@ -59,7 +59,7 @@ public class TuningFork extends Item  {
                 // 如果蓄力时间大于阈值，则投掷
 
                 if (i >= AnvilCraftChaPlus.CONFIG.THROW_THRESHOLD_TIME) {
-                    this.shootFork(level, player, stack);
+                    this.shootFork(level, player);
 
                     // 投掷后，如果不是创造模式，消耗物品
                     if (!player.getAbilities().instabuild)
@@ -70,7 +70,7 @@ public class TuningFork extends Item  {
         }
     }
 
-    private void shootFork(Level level, Player player, ItemStack stack) {
+    private void shootFork(Level level, Player player) {
         ThrownForkEntity fork = AddonEntities.THROWN_FORK.create(level);
 
         if (fork == null) return;
@@ -79,14 +79,14 @@ public class TuningFork extends Item  {
         Vec3 eyePos = player.getEyePosition();
         Vec3 lookVec = player.getLookAngle();
         Vec3 spawnPos = eyePos.add(lookVec.scale(0.5));
-        ItemStack sStack = player.getOffhandItem();;
-
+        ItemStack sStack = player.getOffhandItem();
 
 
         fork.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
-//        AnvilCraftChaPlus.LOGGER.info(sStack.toString());
-        if(!sStack.isEmpty())
-            fork.setItemPlayer(player,sStack.split(1));
+        fork.pickup = AbstractArrow.Pickup.ALLOWED;
+        if (player.getUsedItemHand()!= InteractionHand.OFF_HAND)
+            if(!sStack.isEmpty())
+                fork.setItemPlayer(player,sStack.split(1));
 
         //fork.setUseOnContext(new UseOnContext(level,player,player.getMainHandItem(),stack, ProjectileUtil.get));
         // 正确传入射手（player），并使用玩家的朝向
