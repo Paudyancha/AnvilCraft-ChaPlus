@@ -3,6 +3,8 @@
   "anvilcraft_chaplus.configuration.max_effective_height.tooltip": "Effective maximum height of Cha Anvil",
   "anvilcraft_chaplus.configuration.section.anvilcraft.chaplus.server.toml": "Anvilcraft Chaplus Server Configuration",
   "anvilcraft_chaplus.configuration.section.anvilcraft.chaplus.server.toml.title": "Anvilcraft Chaplus Server Configuration",
+  "anvilcraft_chaplus.configuration.t_h_r_o_w__t_h_r_e_s_h_o_l_d__t_i_m_e": "T H R O W  T H R E S H O L D  T I M E",
+  "anvilcraft_chaplus.configuration.t_h_r_o_w__t_h_r_e_s_h_o_l_d__t_i_m_e.tooltip": "Tuning fork throw threshold time",
   "anvilcraft_chaplus.configuration.title": "Anvilcraft Chaplus Configuration",
   "block.anvilcraft_chaplus.cha_anvil": "Cha Anvil",
   "entity.anvilcraft_chaplus.thrown_fork": "Thrown Fork",

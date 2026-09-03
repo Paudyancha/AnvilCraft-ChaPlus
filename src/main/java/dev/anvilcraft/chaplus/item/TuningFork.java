@@ -21,12 +21,9 @@ import java.util.function.Consumer;
 
 public class TuningFork extends Item  {
 
-
     public TuningFork(Properties properties) {
         super(properties);
     }
-
-
 
     //添加一个thrown属性
     @Override
@@ -49,22 +46,15 @@ public class TuningFork extends Item  {
         return super.use(level, player, usedHand);
     }
 
+    //结束时调用.如果时间大于配置发射
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeCharged) {
         if (!level.isClientSide) {
             if (entity instanceof Player player) {
-                // timeCharged 是总蓄力时间 - 实际使用时间
-                // 计算实际使用时间
-                int i = this.getUseDuration(stack, entity) - timeCharged;
-                // 如果蓄力时间大于阈值，则投掷
-
-                if (i >= AnvilCraftChaPlus.CONFIG.THROW_THRESHOLD_TIME) {
+                if (this.getUseDuration(stack, entity) - timeCharged >= AnvilCraftChaPlus.CONFIG.THROW_THRESHOLD_TIME) {
                     this.shootFork(level, player);
-
-                    // 投掷后，如果不是创造模式，消耗物品
                     if (!player.getAbilities().instabuild)
                         stack.shrink(1);
-
                 }
             }
         }
@@ -84,9 +74,14 @@ public class TuningFork extends Item  {
 
         fork.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
         fork.pickup = AbstractArrow.Pickup.ALLOWED;
+        if (!player.getMainHandItem().isEmpty())
+            fork.setForkStack(player.getMainHandItem());
         if (player.getUsedItemHand()!= InteractionHand.OFF_HAND)
             if(!sStack.isEmpty())
                 fork.setItemPlayer(player,sStack.split(1));
+        fork.setForkStack(player.getMainHandItem().copy());
+
+        AnvilCraftChaPlus.LOGGER.debug(player.getMainHandItem().toString());
 
         //fork.setUseOnContext(new UseOnContext(level,player,player.getMainHandItem(),stack, ProjectileUtil.get));
         // 正确传入射手（player），并使用玩家的朝向
