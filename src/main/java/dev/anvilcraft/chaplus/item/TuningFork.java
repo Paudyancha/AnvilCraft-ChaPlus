@@ -50,25 +50,24 @@ public class TuningFork extends Item  {
 
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeCharged) {
-        AnvilCraftChaPlus.LOGGER.info(String.valueOf(11371));
-        if (entity instanceof Player player) {
-            // timeCharged 是总蓄力时间 - 实际使用时间
-            // 计算实际使用时间
-            int i = this.getUseDuration(stack, entity) - timeCharged;
-            // 如果蓄力时间大于阈值，则投掷
+        if (!level.isClientSide) {
+            AnvilCraftChaPlus.LOGGER.info(String.valueOf(11371));
+            if (entity instanceof Player player) {
+                // timeCharged 是总蓄力时间 - 实际使用时间
+                // 计算实际使用时间
+                int i = this.getUseDuration(stack, entity) - timeCharged;
+                // 如果蓄力时间大于阈值，则投掷
 
-            if (i >= AnvilCraftChaPlus.CONFIG.THROW_THRESHOLD_TIME) {
-                if (!level.isClientSide) {
-                    // 投掷逻辑
+                if (i >= AnvilCraftChaPlus.CONFIG.THROW_THRESHOLD_TIME) {
                     this.shootFork(level, player, stack);
-                }
-                // 投掷后，如果不是创造模式，消耗物品
-                if (!player.getAbilities().instabuild) {
-                    stack.shrink(1);
+
+                    // 投掷后，如果不是创造模式，消耗物品
+                    if (!player.getAbilities().instabuild)
+                        stack.shrink(1);
+
                 }
             }
         }
-        super.releaseUsing(stack, level, entity, timeCharged);
     }
 
     private void shootFork(Level level, Player player, ItemStack stack) {
@@ -81,11 +80,11 @@ public class TuningFork extends Item  {
         Vec3 lookVec = player.getLookAngle();
         Vec3 spawnPos = eyePos.add(lookVec.scale(0.5));
         ItemStack sStack = player.getOffhandItem();;
-        stack.shrink(1);
+
 
 
         fork.setPos(spawnPos.x, spawnPos.y, spawnPos.z);
-
+//        AnvilCraftChaPlus.LOGGER.info(sStack.toString());
         if(!sStack.isEmpty())
             fork.setItemPlayer(player,sStack.split(1));
 

@@ -24,6 +24,7 @@ public class ThrownForkEntity extends ThrownHeavyHalberdEntity {
         this.player = player;
         this.itemStack = itemStack;
         AnvilCraftChaPlus.LOGGER.info("itemSet");
+        AnvilCraftChaPlus.LOGGER.info(itemStack.toString());
     }
 
     public ThrownForkEntity(EntityType<? extends Entity> type, Level level) {
@@ -37,6 +38,9 @@ public class ThrownForkEntity extends ThrownHeavyHalberdEntity {
         if (itemStack.getItem() instanceof ResinBlockItem&&!this.itemStack.isEmpty()) {
             assert player != null;
             ResinBlockItem.useEntity(player,result.getEntity(), itemStack);
+
+        }
+        if (!itemStack.isEmpty()) {
             dropItem(this,itemStack);
         }
         super.onHitEntity(result);
@@ -44,13 +48,16 @@ public class ThrownForkEntity extends ThrownHeavyHalberdEntity {
 
     private static void dropItem(ThrownForkEntity entity, ItemStack itemStack) {
         entity.spawnAtLocation(itemStack);
+
         itemStack.setCount(0);
         AnvilCraftChaPlus.LOGGER.info("itemDrop");
     }
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
-        dropItem(this,itemStack);
+        if (!itemStack.isEmpty())
+            dropItem(this,this.itemStack);
+
         super.onHitBlock(result);
     }
 
