@@ -7,11 +7,14 @@ import dev.anvilcraft.chaplus.init.AddonEntities;
 import dev.anvilcraft.chaplus.init.AddonItemGroups;
 import dev.anvilcraft.chaplus.init.AddonItems;
 import dev.anvilcraft.lib.v2.config.ConfigManager;
+import dev.anvilcraft.lib.v2.network.register.NetworkRegistrar;
 import dev.anvilcraft.lib.v2.registrum.Registrum;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +33,13 @@ public class AnvilCraftChaPlus {
         AddonEntities.register();
         AddonDatagen.init();
         LOGGER.info("嘟嘟哒 (●'◡'●)");
+        modEventBus.addListener(this::registerPayloads);
+    }
+
+    private void registerPayloads(RegisterPayloadHandlersEvent event) {
+        PayloadRegistrar registrar = event.registrar("1");
+
+        NetworkRegistrar.register(registrar, AnvilCraftChaPlus.MOD_ID);
     }
 
     public static ResourceLocation of(String path) {
