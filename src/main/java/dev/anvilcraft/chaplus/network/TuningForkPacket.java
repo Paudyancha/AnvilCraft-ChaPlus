@@ -1,14 +1,17 @@
 package dev.anvilcraft.chaplus.network;
 
 import dev.anvilcraft.chaplus.AnvilCraftChaPlus;
+import dev.anvilcraft.chaplus.item.TuningFork;
 import dev.anvilcraft.lib.v2.network.packet.IServerboundPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
-import net.neoforged.neoforge.network.handling.IPayloadHandler;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public  class TuningForkPacket implements IServerboundPacket {
 
@@ -18,35 +21,23 @@ public  class TuningForkPacket implements IServerboundPacket {
     public static final StreamCodec<RegistryFriendlyByteBuf, TuningForkPacket> STREAM_CODEC =
         StreamCodec.ofMember(TuningForkPacket::encode, TuningForkPacket::new);
 
-    public static final IPayloadHandler<TuningForkPacket> HANDLER  = TuningForkPacket::handle;
 
     private final BlockPos pos;
+    private final InteractionHand hand;
 
-    public TuningForkPacket(BlockPos pos) {
+    public TuningForkPacket(BlockPos pos , InteractionHand hand) {
         this.pos = pos;
+        this.hand = hand;
     }
 
     public TuningForkPacket(RegistryFriendlyByteBuf buf) {
         this.pos = buf.readBlockPos();
+        this.hand = buf.readEnum(InteractionHand.class);
     }
 
     public void encode(RegistryFriendlyByteBuf buf) {
         buf.writeBlockPos(pos);
-    }
-
-    public static void handle(TuningForkPacket packet, IPayloadContext context) {
-        context.enqueueWork(
-            () -> {
-                if (context.flow().isServerbound())
-                    handleOnServer(packet ,context);
-            }
-        );
-    }
-
-    private static void handleOnServer(TuningForkPacket packet, IPayloadContext context) {
-        var player = context.player();
-        var level  = player.level();
-        level.destroyBlock(packet.pos,true);
+        buf.writeEnum(hand);
     }
 
     @Override
@@ -56,6 +47,14 @@ public  class TuningForkPacket implements IServerboundPacket {
 
     @Override
     public void handleOnServer(Player player) {
+        if (!(player instanceof ServerPlayer serverPlayer)) return ;
+        Level level = serverPlayer.level();
+        if (!level.isLoaded(this.pos)) return ;
+
+        ItemStack stack = player.getItemInHand(this.hand);
+        if (!(stack.getItem() instanceof TuningFork)) return;
+        if (player.getCooldowns().isOnCooldown(stack.getItem())) return;
+        TuningFork.tryBreakBlock(level ,player ,stack ,this.pos);
 
     }
 }

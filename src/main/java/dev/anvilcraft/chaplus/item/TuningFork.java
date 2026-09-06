@@ -3,7 +3,6 @@ package dev.anvilcraft.chaplus.item;
 import dev.anvilcraft.chaplus.AnvilCraftChaPlus;
 import dev.anvilcraft.chaplus.entity.ThrownForkEntity;
 import dev.anvilcraft.chaplus.init.AddonEntities;
-import dev.anvilcraft.chaplus.network.TuningForkPacket;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -16,8 +15,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
@@ -64,16 +61,6 @@ public class TuningFork extends Item  {
         }
     }
 
-    @Override
-    public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity miningEntity) {
-        if (!level.isClientSide) {
-            ItemStack offItem = miningEntity.getOffhandItem();
-            if(state.getBlock().asItem() == offItem.getItem())
-                level.destroyBlock(pos, true);
-        }
-        return super.mineBlock(stack, level, state, pos, miningEntity);
-    }
-
     private void shootFork(Level level, Player player) {
         ThrownForkEntity fork = AddonEntities.THROWN_FORK.create(level);
 
@@ -97,13 +84,16 @@ public class TuningFork extends Item  {
         level.addFreshEntity(fork);
     }
 
-    public int tryBreakBlock(Level level, BlockState state, BlockPos pos) {
-        if (!level.isClientSide) {
-            level.destroyBlock(pos, true);
-        }else  {
-            //new TuningForkPacket(pos);
-        }
-        return 0;
+    public static void tryBreakBlock(Level level,  Player player, ItemStack stack,  BlockPos pos) {
+        ItemStack blockItem  = player.getItemInHand(player.getMainHandItem() != stack ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND);
+        if (level.getBlockState(pos).getBlock().asItem() != blockItem.getItem()) return;
+        int durability = stack.getMaxDamage() - stack.getDamageValue();
+        if (durability <= 3 ) return;
+        if (!player.getAbilities().instabuild)
+            stack.setDamageValue(stack.getDamageValue() + (Math.min((durability >> 2), 64)));
+
+        level.destroyBlock(pos, true);
+
     }
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {

@@ -1,7 +1,6 @@
 package dev.anvilcraft.chaplus.client.event;
 
 import dev.anvilcraft.chaplus.AnvilCraftChaPlus;
-import dev.anvilcraft.chaplus.init.AddonItems;
 import dev.anvilcraft.chaplus.item.TuningFork;
 import dev.anvilcraft.chaplus.network.TuningForkPacket;
 import net.neoforged.api.distmarker.Dist;
@@ -17,7 +16,7 @@ public class TuningForkClientEventListener {
     @SubscribeEvent
     public static void breakBlock(PlayerInteractEvent.LeftClickBlock event){
         if (!(event.getItemStack().getItem() instanceof TuningFork)) return;
-        PacketDistributor.sendToServer(new TuningForkPacket(event.getPos()));
+        PacketDistributor.sendToServer(new TuningForkPacket(event.getPos(),event.getHand()));
         event.setCanceled(true);
     }
 
