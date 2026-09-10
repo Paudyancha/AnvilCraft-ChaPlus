@@ -1,19 +1,25 @@
 package dev.anvilcraft.chaplus.entity;
 
-import dev.anvilcraft.chaplus.AnvilCraftChaPlus;
 import dev.anvilcraft.chaplus.init.AddonItems;
 import dev.dubhe.anvilcraft.block.item.ResinBlockItem;
 import dev.dubhe.anvilcraft.entity.ThrownHeavyHalberdEntity;
-import lombok.Setter;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import javax.annotation.Nullable;
 
 public class ThrownForkEntity extends ThrownHeavyHalberdEntity {
@@ -51,29 +57,52 @@ public class ThrownForkEntity extends ThrownHeavyHalberdEntity {
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
-        if (itemStack.getItem() instanceof ResinBlockItem&&!this.itemStack.isEmpty()) {
-            assert player != null;
-            ResinBlockItem.useEntity(player,result.getEntity(), itemStack);
-            return;
-        }
-        super.onHitEntity(result);
         if (!this.level().isClientSide()) {
-            if (!itemStack.isEmpty()) {
-                dropItem(itemStack);
+            double speed = this.getDeltaMovement().length();
+            double baseDamage = this.getBaseDamage();
+            float damage = Mth.ceil(Mth.clamp(speed * baseDamage, 0.0, 2.147483647E9));
+            if (result.getEntity() instanceof LivingEntity livingEntity) {
+                if(damage > livingEntity.getHealth()) {
+                    livingEntity.addEffect(new MobEffectInstance(new MobEffectInstance(MobEffects.WEAKNESS, 5 * 20)));
+                }else{
+                    super.onHitEntity(result);
+                }
+                if (itemStack.getItem() instanceof ResinBlockItem&&!this.itemStack.isEmpty()&&player!=null&&livingEntity.getHealth()>0) {
+                    try {
+                        Method method = itemStack.getItem().getClass().getMethod("useEntity",Player.class,Entity.class,ItemStack.class);
+                        method.invoke(null,player,result.getEntity(),itemStack);
+                    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return;
+                }
             }
+
+            dropItem(itemStack);
+
         }
     }
 
     private  void dropItem( ItemStack itemStack) {
+        if (itemStack.isEmpty()) return;
         this.spawnAtLocation(itemStack);
         this.itemStack = ItemStack.EMPTY;
     }
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
+
+        if  (!this.level().isClientSide()) {
+            if (!itemStack.isEmpty()){
+                if (itemStack.getItem() instanceof ResinBlockItem resinBlockItem) {
+                    if (player!=null && ResinBlockItem.hasMob(itemStack)) {
+                        resinBlockItem.useOn(new UseOnContext(this.level(),player, InteractionHand.MAIN_HAND, itemStack, result));
+                    }
+                }
+                dropItem(this.itemStack);
+            }
+        }
         super.onHitBlock(result);
-        if (!itemStack.isEmpty())
-            dropItem(this.itemStack);
     }
 
     @Override

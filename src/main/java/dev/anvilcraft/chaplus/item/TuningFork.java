@@ -89,8 +89,9 @@ public class TuningFork extends Item  {
         if (level.getBlockState(pos).getBlock().asItem() != blockItem.getItem()) return;
         int durability = stack.getMaxDamage() - stack.getDamageValue();
         if (durability <= 3 ) return;
+
         if (!player.getAbilities().instabuild)
-            stack.setDamageValue(stack.getDamageValue() + (Math.min((durability >> 2), 64)));
+            stack.setDamageValue(stack.getDamageValue() + (Math.min((durability >> 2), 16)));
 
         level.destroyBlock(pos, true);
 
