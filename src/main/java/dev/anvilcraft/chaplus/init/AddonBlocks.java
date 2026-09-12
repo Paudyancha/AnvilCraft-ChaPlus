@@ -1,6 +1,7 @@
 package dev.anvilcraft.chaplus.init;
 
 import dev.anvilcraft.chaplus.block.ChaAnvilBlock;
+import dev.anvilcraft.chaplus.block.GeneticOozeBlock;
 import dev.anvilcraft.lib.v2.registrum.util.entry.BlockEntry;
 import dev.dubhe.anvilcraft.data.AnvilCraftDatagen;
 import dev.dubhe.anvilcraft.util.DataGenUtil;
@@ -30,6 +31,13 @@ public class AddonBlocks {
             .define('B', Items.SPRUCE_PLANKS)
             .unlockedBy(AnvilCraftDatagen.hasItem(Items.MELON), AnvilCraftDatagen.has(Items.MELON))
             .save(provider))
+        .register();
+
+    public static BlockEntry<GeneticOozeBlock> GENETIC_OOZE_BLOCK = REGISTRUM
+        .block("genetic_ooze_block",GeneticOozeBlock::new)
+        .lang("Genetic Ooze")
+        .initialProperties(()-> Blocks.MUD)
+        .blockstate((ctx, provider) -> provider.simpleBlock(ctx.getEntry()))
         .register();
 
     public static void register() {}

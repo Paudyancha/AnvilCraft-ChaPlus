@@ -6,6 +6,7 @@ import dev.anvilcraft.chaplus.init.AddonEntities;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -53,6 +54,7 @@ public class TuningFork extends Item  {
         if (!level.isClientSide) {
             if (entity instanceof Player player) {
                 if (this.getUseDuration(stack, entity) - timeCharged >= AnvilCraftChaPlus.CONFIG.THROW_THRESHOLD_TIME) {
+                    stack.hurtAndBreak(1, (ServerLevel) player.level(),player,item -> {});
                     this.shootFork(level, player);
                     if (!player.getAbilities().instabuild)
                         stack.shrink(1);
@@ -91,7 +93,7 @@ public class TuningFork extends Item  {
         if (durability <= 3 ) return;
 
         if (!player.getAbilities().instabuild)
-            stack.setDamageValue(stack.getDamageValue() + (Math.min((durability >> 2), 16)));
+            stack.hurtAndBreak(Math.min((durability >> 2), 16), (ServerLevel) player.level(),player,item -> {});
 
         level.destroyBlock(pos, true);
 

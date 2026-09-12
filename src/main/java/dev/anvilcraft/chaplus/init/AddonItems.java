@@ -1,6 +1,7 @@
 package dev.anvilcraft.chaplus.init;
 
 import dev.anvilcraft.chaplus.AnvilCraftChaPlus;
+import dev.anvilcraft.chaplus.item.GeneticOozeBucket;
 import dev.anvilcraft.chaplus.item.TuningFork;
 import dev.anvilcraft.lib.v2.registrum.providers.RegistrumRecipeProvider;
 import dev.anvilcraft.lib.v2.registrum.util.entry.ItemEntry;
@@ -14,6 +15,7 @@ import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.common.Tags;
 
 import static dev.anvilcraft.chaplus.AnvilCraftChaPlus.REGISTRUM;
 
@@ -40,12 +42,30 @@ public class AddonItems {
         )
         .register();
 
+    public static final ItemEntry<GeneticOozeBucket> GENETIC_OOZE_BUCKET = REGISTRUM
+        .item("genetic_ooze_bucket", GeneticOozeBucket::new)
+        .properties(prop -> {
+            prop.stacksTo(1);
+            return prop;
+        })
+        .register();
+
+    public static final ItemEntry<Item> MUSH_BAR_BOWL = REGISTRUM
+        .item("mush_bar_bowl", Item::new)
+        .properties(prop -> {
+            prop.food(Foods.RABBIT_STEW);
+
+            return prop;
+        })
+        .register();
+
     public static final ItemEntry<Item> MUSH_BAR = REGISTRUM
         .item("mush_bar", Item::new)
         .properties(prop -> {
             prop.food(Foods.ROTTEN_FLESH);
             return prop;
         })
+        .tag(Tags.Items.FOODS)
         .register();
 
     public static final ItemEntry<Item> MUSH_FRY = REGISTRUM
@@ -54,6 +74,7 @@ public class AddonItems {
             prop.food(Foods.ROTTEN_FLESH);
             return prop;
         })
+        .tag(Tags.Items.FOODS)
         .recipe((ctx, provider) -> {
             SimpleCookingRecipeBuilder
                 .campfireCooking(

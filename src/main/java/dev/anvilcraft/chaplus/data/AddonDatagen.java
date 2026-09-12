@@ -4,6 +4,7 @@ import dev.anvilcraft.chaplus.AnvilCraftChaPlus;
 import dev.anvilcraft.chaplus.data.lang.LangHandler;
 import dev.anvilcraft.lib.v2.integration.IntegrationHook;
 import dev.anvilcraft.lib.v2.registrum.providers.ProviderType;
+import dev.anvilcraft.chaplus.data.recipe.RecipeHandler;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -31,5 +32,6 @@ public class AddonDatagen {
     public static void init() {
         var genInit = REGISTRUM.getDataGenInitializer();
         REGISTRUM.addDataGenerator(ProviderType.LANG, LangHandler::init);
+        REGISTRUM.addDataGenerator(ProviderType.RECIPE, RecipeHandler::init);
     }
 }

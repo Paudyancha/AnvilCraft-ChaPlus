@@ -3,6 +3,7 @@ package dev.anvilcraft.chaplus.entity;
 import dev.anvilcraft.chaplus.init.AddonItems;
 import dev.dubhe.anvilcraft.block.item.ResinBlockItem;
 import dev.dubhe.anvilcraft.entity.ThrownHeavyHalberdEntity;
+import dev.dubhe.anvilcraft.item.TopazItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -93,11 +94,14 @@ public class ThrownForkEntity extends ThrownHeavyHalberdEntity {
     protected void onHitBlock(BlockHitResult result) {
 
         if  (!this.level().isClientSide()) {
-            if (!itemStack.isEmpty()){
+            if (!itemStack.isEmpty() && player!=null){
+                UseOnContext context = new UseOnContext(this.level(),player, InteractionHand.MAIN_HAND, itemStack, result);
                 if (itemStack.getItem() instanceof ResinBlockItem resinBlockItem) {
-                    if (player!=null && ResinBlockItem.hasMob(itemStack)) {
-                        resinBlockItem.useOn(new UseOnContext(this.level(),player, InteractionHand.MAIN_HAND, itemStack, result));
+                    if (  ResinBlockItem.hasMob(itemStack)) {
+                        resinBlockItem.useOn(context);
                     }
+                }else if (itemStack.getItem() instanceof TopazItem topazItem) {
+                    topazItem.useOn(context);
                 }
                 dropItem(this.itemStack);
             }
