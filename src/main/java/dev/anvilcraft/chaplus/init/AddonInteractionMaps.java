@@ -1,7 +1,5 @@
 package dev.anvilcraft.chaplus.init;
 
-import dev.dubhe.anvilcraft.init.block.ModBlocks;
-import dev.dubhe.anvilcraft.init.item.ModItems;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
@@ -21,7 +19,7 @@ public class AddonInteractionMaps {
                 hand,
                 stack,
                 AddonItems.GENETIC_OOZE_BUCKET.asStack(),
-                (s) -> ModBlocks.EXP_FLUID_CAULDRON.get().isFull(state),
+                (s) -> AddonBlocks.GENETIC_OOZE_CAULDRON.get().isFull(s),
                 SoundEvents.BUCKET_FILL
             )
         );

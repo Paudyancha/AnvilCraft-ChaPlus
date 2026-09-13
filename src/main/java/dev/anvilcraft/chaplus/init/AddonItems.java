@@ -1,7 +1,6 @@
 package dev.anvilcraft.chaplus.init;
 
 import dev.anvilcraft.chaplus.AnvilCraftChaPlus;
-import dev.anvilcraft.chaplus.item.GeneticOozeBucket;
 import dev.anvilcraft.chaplus.item.TuningFork;
 import dev.anvilcraft.lib.v2.registrum.providers.RegistrumRecipeProvider;
 import dev.anvilcraft.lib.v2.registrum.util.entry.ItemEntry;

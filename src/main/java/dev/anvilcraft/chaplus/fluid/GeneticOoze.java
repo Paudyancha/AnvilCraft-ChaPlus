@@ -5,6 +5,7 @@ import dev.anvilcraft.chaplus.init.AddonFluids;
 import dev.anvilcraft.chaplus.init.AddonItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
@@ -13,12 +14,23 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.FluidType;
 
 public class GeneticOoze extends Fluid {
 
     public static final FluidType TYPE = new FluidType(FluidType.Properties.create()
-        .descriptionId("block.anvilcraft_chaplus.genetic_ooze")
+        .descriptionId("block.anvilcraft_chaplus.genetic_ooze_block")
+        .density(3000)
+        .viscosity(6000)
+        .motionScale(0)
+        .canPushEntity(false)
+        .canSwim(false)
+        .fallDistanceModifier(0)
+        .canConvertToSource(false)
+        .supportsBoating(false)
+        .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.MUD_PLACE)
     );
 
     @Override

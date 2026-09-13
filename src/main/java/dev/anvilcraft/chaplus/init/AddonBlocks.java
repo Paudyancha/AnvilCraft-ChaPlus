@@ -12,6 +12,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static dev.anvilcraft.chaplus.AnvilCraftChaPlus.REGISTRUM;
 
@@ -40,6 +41,7 @@ public class AddonBlocks {
         .block("genetic_ooze_block",GeneticOozeBlock::new)
         .lang("Genetic Ooze")
         .initialProperties(()-> Blocks.MUD)
+        .properties(BlockBehaviour.Properties::noLootTable)
         .blockstate((ctx, provider) -> provider.simpleBlock(ctx.getEntry()))
         .register();
 
