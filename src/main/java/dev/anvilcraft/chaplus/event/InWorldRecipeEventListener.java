@@ -40,17 +40,14 @@ public class InWorldRecipeEventListener {
         BlockPos outputPos = BlockPos.containing(context.getPos().add(recipe.getProperty().getBlockOutputOffset()));
 
         BlockState state = context.getLevel().getBlockState(outputPos);
-        AnvilCraftChaPlus.LOGGER.info(state.toString());
         state = state.setValue(INFECTION,getInfection(stack,state));
         cache.setBlock(outputPos,state);
         context.getLevel().setBlockAndUpdate(outputPos, state);
-
-        AnvilCraftChaPlus.LOGGER.info(state.toString());
     }
 
     private static int getInfection(ItemStack stack ,BlockState state) {
         FoodProperties food = stack.get(DataComponents.FOOD);
-        if (food != null) return Math.min(15,state.getValue(INFECTION)+stack.getCount());
+        if (food != null) return Math.min(15,state.getValue(INFECTION)+stack.getCount()*food.nutrition());
         AnvilCraftChaPlus.LOGGER.info("getInfection {}", stack);
         return state.getValue(INFECTION);
     }

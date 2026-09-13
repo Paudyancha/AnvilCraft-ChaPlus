@@ -11,9 +11,11 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SolidBucketItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.Tags;
 
@@ -42,8 +44,8 @@ public class AddonItems {
         )
         .register();
 
-    public static final ItemEntry<GeneticOozeBucket> GENETIC_OOZE_BUCKET = REGISTRUM
-        .item("genetic_ooze_bucket", GeneticOozeBucket::new)
+    public static final ItemEntry<SolidBucketItem> GENETIC_OOZE_BUCKET = REGISTRUM
+        .item("genetic_ooze_bucket", prop-> new SolidBucketItem(AddonBlocks.GENETIC_OOZE_BLOCK.get(), SoundEvents.MUD_PLACE, prop))
         .properties(prop -> {
             prop.stacksTo(1);
             return prop;

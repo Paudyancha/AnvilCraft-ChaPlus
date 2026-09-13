@@ -1,0 +1,14 @@
+{
+  "type": "anvilcraft:item_inject",
+  "block_ingredient": {
+    "blocks": "anvilcraft_chaplus:genetic_ooze_block"
+  },
+  "block_result": {
+    "block": "anvilcraft_chaplus:genetic_ooze_block"
+  },
+  "ingredients": [
+    {
+      "items": "#c:foods"
+    }
+  ]
+}

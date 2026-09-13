@@ -1,6 +1,7 @@
 package dev.anvilcraft.chaplus.fluid;
 
 import dev.anvilcraft.chaplus.init.AddonBlocks;
+import dev.anvilcraft.chaplus.init.AddonFluids;
 import dev.anvilcraft.chaplus.init.AddonItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,8 +13,14 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.fluids.FluidType;
 
 public class GeneticOoze extends Fluid {
+
+    public static final FluidType TYPE = new FluidType(FluidType.Properties.create()
+        .descriptionId("block.anvilcraft_chaplus.genetic_ooze")
+    );
+
     @Override
     public Item getBucket() {
         return AddonItems.GENETIC_OOZE_BUCKET.asItem();
@@ -32,7 +39,7 @@ public class GeneticOoze extends Fluid {
 
     @Override
     protected Vec3 getFlow(BlockGetter blockGetter, BlockPos blockPos, FluidState fluidState) {
-        return null;
+        return Vec3.ZERO;
     }
 
     @Override
@@ -57,21 +64,26 @@ public class GeneticOoze extends Fluid {
 
     @Override
     protected BlockState createLegacyBlock(FluidState fluidState) {
-        return null;
+        return AddonBlocks.GENETIC_OOZE_BLOCK.getDefaultState();
     }
 
     @Override
     public boolean isSource(FluidState fluidState) {
-        return false;
+        return true;
     }
 
     @Override
     public int getAmount(FluidState fluidState) {
-        return 0;
+        return 8;
     }
 
     @Override
-    public VoxelShape getShape(FluidState fluidState, BlockGetter blockGetter, BlockPos blockPos) {
-        return null;
+    public VoxelShape getShape(FluidState fluidState, BlockGetter level, BlockPos pos) {
+        return AddonBlocks.GENETIC_OOZE_BLOCK.getDefaultState().getShape(level, pos);
+    }
+
+    @Override
+    public FluidType getFluidType() {
+        return AddonFluids.GENETIC_OOZE_TYPE.get();
     }
 }

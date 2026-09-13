@@ -1,0 +1,20 @@
+{
+  "type": "anvilcraft:fast_cooking",
+  "fluid": "minecraft:water",
+  "ingredients": [
+    {
+      "items": "minecraft:dirt"
+    },
+    {
+      "items": "#c:foods"
+    },
+    {
+      "items": "minecraft:bowl"
+    }
+  ],
+  "results": [
+    {
+      "id": "anvilcraft_chaplus:mush_bar_bowl"
+    }
+  ]
+}
