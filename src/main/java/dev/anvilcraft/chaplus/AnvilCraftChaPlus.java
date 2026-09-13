@@ -9,6 +9,7 @@ import dev.anvilcraft.chaplus.init.AddonInteractionMaps;
 import dev.anvilcraft.chaplus.init.AddonItemGroups;
 import dev.anvilcraft.chaplus.init.AddonItems;
 import dev.anvilcraft.lib.v2.config.ConfigManager;
+import dev.anvilcraft.lib.v2.integration.IntegrationHook;
 import dev.anvilcraft.lib.v2.network.register.NetworkRegistrar;
 import dev.anvilcraft.lib.v2.registrum.Registrum;
 import net.minecraft.resources.ResourceLocation;
@@ -16,6 +17,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.loading.progress.StartupNotificationManager;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.slf4j.Logger;
@@ -36,9 +38,16 @@ public class AnvilCraftChaPlus {
         AddonEntities.register();
         AddonFluids.register(modEventBus);
         AddonDatagen.init();
-        LOGGER.info("嘟嘟哒 (●'◡'●)");
-        modEventBus.addListener(AnvilCraftChaPlus::commonSetup);
-        modEventBus.addListener(this::registerPayloads);
+        registerEvents(modEventBus);
+        StartupNotificationManager.addModMessage("嘟嘟哒 (●'◡'●)");
+        IntegrationHook.setModEventBus(modEventBus);
+        IntegrationHook.setModContainer(container);
+        LOGGER.info("sgs qd");
+    }
+
+    private void registerEvents(IEventBus event) {
+        event.addListener(AnvilCraftChaPlus::commonSetup);
+        event.addListener(this::registerPayloads);
     }
 
     private void registerPayloads(RegisterPayloadHandlersEvent event) {

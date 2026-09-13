@@ -6,6 +6,7 @@ public class RecipeHandler {
     public static void init(RegistrumRecipeProvider provider) {
         FastCookingRecipeLoader.init(provider);
         ItemInjectRecipeLoader.init(provider);
+        SolidLiquidRecipeLoader.init(provider);
         StampingRecipeLoader.init(provider);
     }
 }

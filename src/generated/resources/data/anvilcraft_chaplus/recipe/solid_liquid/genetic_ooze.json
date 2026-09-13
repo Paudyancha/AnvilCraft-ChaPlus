@@ -1,0 +1,18 @@
+{
+  "type": "anvilcraft:solid_liquid",
+  "consume": 250,
+  "fluid": "anvilcraft_chaplus:genetic_ooze",
+  "ingredients": [
+    {
+      "items": "#c:foods"
+    },
+    {
+      "items": "minecraft:dirt"
+    }
+  ],
+  "results": [],
+  "transform": {
+    "amount": 500,
+    "id": "anvilcraft_chaplus:genetic_ooze"
+  }
+}

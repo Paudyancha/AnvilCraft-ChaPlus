@@ -78,7 +78,7 @@ public class GeneticOozeBlock extends Block implements BucketPickup {
             BlockState targetState = level.getBlockState(targetPos);
             int infection = state.getValue(INFECTION);
             int targetInfection = targetState.getValue(INFECTION);
-            if (infection > targetInfection) {
+            if (infection > 1 && infection > targetInfection) {
                 level.setBlockAndUpdate(targetPos, targetState.setValue(INFECTION, targetInfection + 1));
                 level.setBlockAndUpdate(pos, state.setValue(INFECTION, infection - 1));
             }

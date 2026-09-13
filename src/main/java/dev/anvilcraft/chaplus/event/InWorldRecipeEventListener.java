@@ -48,7 +48,6 @@ public class InWorldRecipeEventListener {
     private static int getInfection(ItemStack stack ,BlockState state) {
         FoodProperties food = stack.get(DataComponents.FOOD);
         if (food != null) return Math.min(15,state.getValue(INFECTION)+stack.getCount()*food.nutrition());
-        AnvilCraftChaPlus.LOGGER.info("getInfection {}", stack);
         return state.getValue(INFECTION);
     }
 }
