@@ -69,10 +69,11 @@ public class AddonItems {
         .tag(Tags.Items.FOODS)
         .register();
 
+    @SuppressWarnings("unused")
     public static final ItemEntry<Item> MUSH_FRY = REGISTRUM
         .item("mush_fry", Item::new)
         .properties(prop -> {
-            prop.food(Foods.ROTTEN_FLESH);
+            prop.food(Foods.BEEF);
             return prop;
         })
         .tag(Tags.Items.FOODS)
