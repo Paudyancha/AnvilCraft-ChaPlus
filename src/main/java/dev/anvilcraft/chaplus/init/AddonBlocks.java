@@ -1,5 +1,6 @@
 package dev.anvilcraft.chaplus.init;
 
+import dev.anvilcraft.chaplus.block.WormBlock;
 import dev.anvilcraft.chaplus.block.ChaAnvilBlock;
 import dev.anvilcraft.chaplus.block.GeneticOozeBlock;
 import dev.anvilcraft.chaplus.block.GeneticOozeCauldronBlock;
@@ -21,6 +22,7 @@ public class AddonBlocks {
         REGISTRUM.defaultCreativeTab(AddonItemGroups.CHAPLUS_ITEMS.getKey());
     }
 
+    @SuppressWarnings("unused")
     public static BlockEntry<ChaAnvilBlock> CHA_ANVIL = REGISTRUM
         .block("cha_anvil",ChaAnvilBlock::new)
         .blockstate(DataGenUtil::noExtraModelOrState)
@@ -40,6 +42,7 @@ public class AddonBlocks {
     public static BlockEntry<GeneticOozeBlock> GENETIC_OOZE_BLOCK = REGISTRUM
         .block("genetic_ooze_block",GeneticOozeBlock::new)
         .lang("Genetic Ooze")
+        .simpleItem()
         .initialProperties(()-> Blocks.MUD)
         .properties(BlockBehaviour.Properties::noLootTable)
         .blockstate((ctx, provider) -> provider.simpleBlock(ctx.getEntry()))
@@ -52,6 +55,16 @@ public class AddonBlocks {
         .loot((tables, block) -> tables.dropOther(block, Items.CAULDRON))
         .tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.CAULDRONS)
         .onRegister(block -> Item.BY_BLOCK.put(block, Items.CAULDRON))
+        .register();
+
+    @SuppressWarnings("unused")
+    public static final BlockEntry<WormBlock>  CEMENT_WORM_BLOCK = REGISTRUM
+        .block("cement_worm_block", WormBlock::new)
+        .lang("Cement Worm")
+        .initialProperties(()-> Blocks.MUD)
+        .properties(BlockBehaviour.Properties::noOcclusion)
+        .simpleItem()
+        .blockstate(DataGenUtil::noExtraModelOrState)
         .register();
 
     public static void register() {}

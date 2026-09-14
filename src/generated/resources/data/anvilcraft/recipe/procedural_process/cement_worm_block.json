@@ -1,0 +1,70 @@
+{
+  "type": "anvilcraft:procedural_process",
+  "icon": {
+    "count": 1,
+    "id": "anvilcraft_chaplus:cement_worm_block"
+  },
+  "initial_block": {
+    "blocks": "anvilcraft_chaplus:genetic_ooze_block"
+  },
+  "loop": 1,
+  "result_block": {
+    "block": "anvilcraft_chaplus:cement_worm_block"
+  },
+  "steps": [
+    {
+      "content": {
+        "type": "anvilcraft:block_compress",
+        "inputs": [
+          {
+            "blocks": "minecraft:snow_block"
+          },
+          {
+            "blocks": "anvilcraft_chaplus:genetic_ooze_block"
+          }
+        ],
+        "result": {
+          "block": "anvilcraft:wip_block"
+        }
+      },
+      "index": 0
+    },
+    {
+      "content": {
+        "type": "anvilcraft:item_inject",
+        "block_ingredient": {
+          "blocks": "anvilcraft:wip_block"
+        },
+        "block_result": {
+          "block": "anvilcraft:wip_block"
+        },
+        "ingredients": [
+          {
+            "items": "anvilcraft:resin_block",
+            "predicates": {
+              "anvilcraft:saved_entity": {}
+            }
+          }
+        ]
+      },
+      "index": 1
+    },
+    {
+      "content": {
+        "type": "anvilcraft:item_inject",
+        "block_ingredient": {
+          "blocks": "anvilcraft:wip_block"
+        },
+        "block_result": {
+          "block": "anvilcraft:wip_block"
+        },
+        "ingredients": [
+          {
+            "items": "#c:glass_blocks"
+          }
+        ]
+      },
+      "index": 2
+    }
+  ]
+}

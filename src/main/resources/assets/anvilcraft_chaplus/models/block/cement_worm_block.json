@@ -1,0 +1,10 @@
+{
+  "parent": "anvilcraft_chaplus:block/worm_cube",
+  "render_type": "cutout",
+  "textures": {
+    "end": "anvilcraft_chaplus:block/cement_worm_end",
+    "side": "anvilcraft_chaplus:block/cement_worm_side",
+    "in0": "anvilcraft_chaplus:block/cement_worm_in0",
+    "in1": "anvilcraft_chaplus:block/cement_worm_in1"
+  }
+}

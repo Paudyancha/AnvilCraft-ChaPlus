@@ -29,7 +29,7 @@ public class ThrownForkEntity extends ThrownHeavyHalberdEntity {
 
 
     public void setForkStack(ItemStack itemStack) {
-        if(itemStack.isEmpty())
+        if(itemStack.isEmpty()||itemStack.getMaxDamage() - itemStack.getDamageValue() <0)
             return;
         setPickupItemStack(itemStack);
     }

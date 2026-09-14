@@ -53,7 +53,7 @@ public class TuningFork extends Item  {
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeCharged) {
         if (!level.isClientSide) {
             if (entity instanceof Player player) {
-                if (this.getUseDuration(stack, entity) - timeCharged >= AnvilCraftChaPlus.CONFIG.THROW_THRESHOLD_TIME) {
+                if (this.getUseDuration(stack, entity) - timeCharged >= AnvilCraftChaPlus.CONFIG.THROW_THRESHOLD_TIME && stack.getMaxDamage() - stack.getDamageValue() > 4) {
                     stack.hurtAndBreak(1, (ServerLevel) player.level(),player,item -> {});
                     this.shootFork(level, player);
                     if (!player.getAbilities().instabuild)

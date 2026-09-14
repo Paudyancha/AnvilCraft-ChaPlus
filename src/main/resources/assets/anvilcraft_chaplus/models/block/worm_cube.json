@@ -1,0 +1,51 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made by Paudyan with Blockbench",
+	"parent": "block/block",
+	"textures": {
+      "particle": "#side",
+      "down": "#end",
+      "up": "#end",
+      "north": "#side",
+      "east": "#side",
+      "south": "#side",
+      "west": "#side",
+      "in0": "#in0",
+      "in1": "#in1"
+	},
+	"elements": [
+      {   "from": [ 0, 0, 0 ],
+        "to": [ 16, 16, 16 ],
+        "faces": {
+          "down":  { "texture": "#down", "cullface": "down" },
+          "up":    { "texture": "#up", "rotation": 180, "cullface": "up" },
+          "north": { "texture": "#north", "cullface": "north" },
+          "south": { "texture": "#south", "cullface": "south" },
+          "west":  { "texture": "#west", "cullface": "west" },
+          "east":  { "texture": "#east", "cullface": "east" }
+        }
+      },
+		{
+			"from": [14, 14, 16],
+			"to": [2, 2, 0],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 14, 16]},
+			"faces": {
+				"east": {"uv": [0, 2, 16, 14], "texture": "#in1"},
+				"west": {"uv": [0, 2, 16, 14], "texture": "#in1"},
+				"up": {"uv": [0, 0, 12, 16], "texture": "#in0", "rotation": 180},
+				"down": {"uv": [0, 0, 12, 16], "texture": "#in0"}
+			}
+		},
+		{
+			"from": [16, 14, 14],
+			"to": [0, 2, 2],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 2, 2]},
+			"faces": {
+				"north": {"uv": [0, 2, 16, 14], "texture": "#in1"},
+				"south": {"uv": [0, 2, 16, 14], "texture": "#in1"},
+				"up": {"uv": [0, 2, 16, 14], "texture": "#in1"},
+				"down": {"uv": [0, 2, 16, 14], "texture": "#in1"}
+			}
+		}
+	]
+}
