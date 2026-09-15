@@ -1,5 +1,9 @@
 {
   "type": "anvilcraft:procedural_process",
+  "displayed_models": [
+    "anvilcraft_chaplus:block/wip_display/cement_worm_wip0",
+    "anvilcraft_chaplus:block/wip_display/cement_worm_wip1"
+  ],
   "icon": {
     "count": 1,
     "id": "anvilcraft_chaplus:cement_worm_block"

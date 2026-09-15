@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "anvilcraft_chaplus:block/worm_end_wip0",
+    "side": "anvilcraft_chaplus:block/cement_worm_wip_side"
+  }
+}

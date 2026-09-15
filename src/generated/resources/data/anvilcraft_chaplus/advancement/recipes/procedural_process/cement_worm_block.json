@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "anvilcraft:procedural_process/cement_worm_block"
+        "recipe": "anvilcraft_chaplus:procedural_process/cement_worm_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -15,7 +15,7 @@
   ],
   "rewards": {
     "recipes": [
-      "anvilcraft:procedural_process/cement_worm_block"
+      "anvilcraft_chaplus:procedural_process/cement_worm_block"
     ]
   }
 }

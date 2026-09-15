@@ -1,8 +1,10 @@
 package dev.anvilcraft.chaplus.data.recipe;
 
+import dev.anvilcraft.chaplus.AnvilCraftChaPlus;
 import dev.anvilcraft.chaplus.init.AddonBlocks;
 import dev.anvilcraft.lib.v2.registrum.providers.RegistrumRecipeProvider;
 import dev.anvilcraft.lib.v2.util.predicate.ItemIngredientPredicate;
+import dev.dubhe.anvilcraft.AnvilCraft;
 import dev.dubhe.anvilcraft.init.block.ModBlocks;
 import dev.dubhe.anvilcraft.init.item.ModItemSubPredicates;
 import dev.dubhe.anvilcraft.item.property.predicate.ItemSavedEntityPredicate;
@@ -46,10 +48,9 @@ public class ProceduralProcessRecipeLoader {
             .result(AddonBlocks.CEMENT_WORM_BLOCK)
             .icon(AddonBlocks.CEMENT_WORM_BLOCK.asStack())
             .displayedModels(
-                //AnvilCraft.of("nesting_shulker_box"),
-                //AnvilCraft.of("over_nesting_shulker_box"),
-                //AnvilCraft.of("supercritical_nesting_shulker_box")
+                AnvilCraftChaPlus.of("cement_worm_wip0"),
+                AnvilCraftChaPlus.of("cement_worm_wip1")
             )
-            .save(provider);
+            .save(provider, AnvilCraftChaPlus.of("procedural_process/cement_worm_block"));
     }
 }

@@ -60,14 +60,12 @@ public class ChaAnvilBlock extends BetterAnvilBlock implements IHammerRemovable 
                     level.setBlockAndUpdate(pos, state.setValue(HAS_EATEN_MELON , true));
             }else  if(state.getValue(HAS_EATEN_MELON))
                 level.setBlockAndUpdate(pos, state.setValue(HAS_EATEN_MELON,damageDropped(level , belowPos , belowBlock)));
-
         }
         super.onLand(level, pos, state, replaceableState, fallingBlock);
     }
 
     @Override
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-
         super.fallOn(level, state, pos, entity, fallDistance);
     }
 
