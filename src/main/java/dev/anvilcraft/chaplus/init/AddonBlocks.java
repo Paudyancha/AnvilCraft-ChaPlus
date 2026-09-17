@@ -1,19 +1,25 @@
 package dev.anvilcraft.chaplus.init;
 
+import dev.anvilcraft.chaplus.AnvilCraftChaPlus;
 import dev.anvilcraft.chaplus.block.WormBlock;
 import dev.anvilcraft.chaplus.block.ChaAnvilBlock;
 import dev.anvilcraft.chaplus.block.GeneticOozeBlock;
 import dev.anvilcraft.chaplus.block.GeneticOozeCauldronBlock;
+import dev.anvilcraft.chaplus.block.item.WormBlockItem;
 import dev.anvilcraft.lib.v2.registrum.util.entry.BlockEntry;
 import dev.dubhe.anvilcraft.data.AnvilCraftDatagen;
 import dev.dubhe.anvilcraft.util.DataGenUtil;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 
 import static dev.anvilcraft.chaplus.AnvilCraftChaPlus.REGISTRUM;
 
@@ -63,8 +69,27 @@ public class AddonBlocks {
         .lang("Cement Worm")
         .initialProperties(()-> Blocks.MUD)
         .properties(BlockBehaviour.Properties::noOcclusion)
-        .simpleItem()
         .blockstate(DataGenUtil::noExtraModelOrState)
+        .item(WormBlockItem::new)
+        .properties(properties -> properties.component(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY))
+        .model((ctx, prov) -> prov.getBuilder(ctx.getName())
+            .parent(new ModelFile.UncheckedModelFile("builtin/entity"))
+            .texture("particle", AnvilCraftChaPlus.of("block/cement_worm_side"))
+            .transforms()
+            .transform(ItemDisplayContext.GUI)
+            .rotation(30, 225, 0).scale(0.625F).end()
+            .transform(ItemDisplayContext.GROUND)
+            .translation(0, 3, 0).scale(0.25F).end()
+            .transform(ItemDisplayContext.FIXED)
+            .scale(0.5F).end()
+            .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)
+            .rotation(75, 45, 0).translation(0, 2.5F, 0).scale(0.375F).end()
+            .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
+            .rotation(0, 45, 0).scale(0.4F).end()
+            .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND)
+            .rotation(0, 225, 0).scale(0.4F).end()
+            .end())
+        .build()
         .register();
 
     public static void register() {}

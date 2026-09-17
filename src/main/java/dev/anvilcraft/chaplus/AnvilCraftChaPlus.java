@@ -2,6 +2,7 @@ package dev.anvilcraft.chaplus;
 
 import dev.anvilcraft.chaplus.config.AddonServerConfig;
 import dev.anvilcraft.chaplus.data.AddonDatagen;
+import dev.anvilcraft.chaplus.init.AddonBlockEntities;
 import dev.anvilcraft.chaplus.init.AddonBlocks;
 import dev.anvilcraft.chaplus.init.AddonEntities;
 import dev.anvilcraft.chaplus.init.AddonFluids;
@@ -34,6 +35,7 @@ public class AnvilCraftChaPlus {
     public AnvilCraftChaPlus(IEventBus modEventBus, ModContainer container) {
         AddonItems.register();
         AddonBlocks.register();
+        AddonBlockEntities.register();
         AddonItemGroups.register(modEventBus);
         AddonEntities.register();
         AddonFluids.register(modEventBus);

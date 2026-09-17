@@ -3,6 +3,7 @@ package dev.anvilcraft.chaplus.event;
 import dev.anvilcraft.chaplus.AnvilCraftChaPlus;
 import dev.anvilcraft.chaplus.api.fluid.BowlFluidHandler;
 import dev.anvilcraft.chaplus.fluid.GeneticOozeBucketWrapper;
+import dev.anvilcraft.chaplus.init.AddonBlockEntities;
 import dev.anvilcraft.chaplus.init.AddonBlocks;
 import dev.anvilcraft.chaplus.init.AddonFluids;
 import dev.anvilcraft.chaplus.init.AddonItems;
@@ -30,6 +31,12 @@ public class AddonCapabilitiesEventListener {
             Capabilities.FluidHandler.ITEM,
             (stack, ctx) -> new BowlFluidHandler(stack),
             AddonItems.MUSH_BAR_BOWL, Items.BOWL
+        );
+
+        event.registerBlockEntity(
+            Capabilities.FluidHandler.BLOCK,
+            AddonBlockEntities.CEMENT_WORM_BLOCK_ENTITY.get(),
+            (be, side) -> be.getFluidHandler()
         );
     }
 
