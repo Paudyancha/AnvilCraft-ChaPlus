@@ -36,7 +36,7 @@ public class CementWormBlockEntity extends WormBlockEntity{
 
     private static boolean platformExp(Level level, BlockPos pos, WormBlockEntity worm, int size) {
         if (level.isClientSide()) return false;
-        if (worm.tank.isEmpty() || worm.tank.getFluid().is(ModFluidTags.CEMENT)) return false;
+        if (worm.tank.isEmpty() || !worm.tank.getFluid().is(ModFluidTags.CEMENT)) return false;
         MinecraftServer server = level.getServer();
         if (server == null) return false;
         if (worm.tank.getFluidAmount() < 1000 << size ) return false;
