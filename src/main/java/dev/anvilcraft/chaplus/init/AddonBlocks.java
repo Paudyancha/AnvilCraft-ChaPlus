@@ -1,7 +1,7 @@
 package dev.anvilcraft.chaplus.init;
 
 import dev.anvilcraft.chaplus.AnvilCraftChaPlus;
-import dev.anvilcraft.chaplus.block.WormBlock;
+import dev.anvilcraft.chaplus.block.CementWormBlock;
 import dev.anvilcraft.chaplus.block.ChaAnvilBlock;
 import dev.anvilcraft.chaplus.block.GeneticOozeBlock;
 import dev.anvilcraft.chaplus.block.GeneticOozeCauldronBlock;
@@ -64,8 +64,8 @@ public class AddonBlocks {
         .register();
 
     @SuppressWarnings("unused")
-    public static final BlockEntry<WormBlock>  CEMENT_WORM_BLOCK = REGISTRUM
-        .block("cement_worm_block", WormBlock::new)
+    public static final BlockEntry<CementWormBlock>  CEMENT_WORM_BLOCK = REGISTRUM
+        .block("cement_worm_block", CementWormBlock::new)
         .lang("Cement Worm")
         .initialProperties(()-> Blocks.MUD)
         .properties(BlockBehaviour.Properties::noOcclusion)

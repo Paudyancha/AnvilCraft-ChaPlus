@@ -11,6 +11,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -30,6 +31,8 @@ public class WormBlockEntity extends BlockEntity implements IFluidHandlerHolder 
             WormBlockEntity.this.onTankChanged();
         }
     };
+
+    protected int hitNum = 0;
 
     public WormBlockEntity(
         BlockEntityType<?> type,
@@ -66,18 +69,21 @@ public class WormBlockEntity extends BlockEntity implements IFluidHandlerHolder 
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         tag.put(WormBlockEntity.TAG_TANK, this.tank.writeToNBT(registries, new CompoundTag()));
+        tag.putInt("hitNum", this.hitNum);
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         this.tank.readFromNBT(registries, tag.getCompound(WormBlockEntity.TAG_TANK));
+        this.hitNum = tag.getInt("hitNum");
     }
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         CompoundTag tag = super.getUpdateTag(registries);
         tag.put(WormBlockEntity.TAG_TANK, this.tank.writeToNBT(registries, new CompoundTag()));
+        tag.putInt("hitNum", this.hitNum);
         return tag;
     }
 
@@ -97,5 +103,9 @@ public class WormBlockEntity extends BlockEntity implements IFluidHandlerHolder 
     @Override
     public IFluidHandler getFluidHandler() {
         return this.tank;
+    }
+
+    public void landOn(Level level, BlockPos pos, WormBlockEntity worm) {
+        worm.hitNum +=1;
     }
 }

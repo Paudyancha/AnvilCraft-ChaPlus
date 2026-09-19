@@ -35,7 +35,13 @@ public class AddonCapabilitiesEventListener {
 
         event.registerBlockEntity(
             Capabilities.FluidHandler.BLOCK,
-            AddonBlockEntities.CEMENT_WORM_BLOCK_ENTITY.get(),
+            AddonBlockEntities.NORMAL_WORM_BLOCK_ENTITY.get(),
+            (be, side) -> be.getFluidHandler()
+        );
+
+        event.registerBlockEntity(
+            Capabilities.FluidHandler.BLOCK,
+            AddonBlockEntities.CEMENT_WORM_BLOCK_BLOCK_ENTITY.get(),
             (be, side) -> be.getFluidHandler()
         );
     }

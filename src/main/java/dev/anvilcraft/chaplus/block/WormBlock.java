@@ -40,7 +40,7 @@ public class WormBlock extends Block implements EntityBlock, IHammerRemovable, I
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return AddonBlockEntities.CEMENT_WORM_BLOCK_ENTITY.create(pos, state);
+        return AddonBlockEntities.NORMAL_WORM_BLOCK_ENTITY.create(pos, state);
     }
 
     @Override
@@ -77,6 +77,13 @@ public class WormBlock extends Block implements EntityBlock, IHammerRemovable, I
             }
         }
         return drops;
+    }
+
+    public static void landOn(Level level, BlockPos pos) {
+        if (level.isClientSide) return;
+        if (level.getBlockEntity(pos)  instanceof WormBlockEntity worm ) {
+            worm.landOn(level, pos, worm);
+        }
     }
 
     @Override
